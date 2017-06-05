@@ -1,18 +1,28 @@
 package controller;
 
 import java.util.Random;
+// import java.util.Scanner;
+
 //import java.util.concurrent.ThreadLocalRandom;
 import model.*; //<--- wiem, ¿e to s³abe rozwi¹zanie
 //TODO: porobiæ pakiety w model, dziel¹ce klasy.
 //TODO: przenieœæ metodê walki do innej klasy, np. Arena i stworzyæ jej obiekt na której bêdzie wywo³ywana walka 
 //TODO: zmieniæ metody na prywatne
 //TODO: przypisaæ do zminnej lokalnej w funkcjach, zmiast getów().
+//TODO: pomyœleæ, ¿eby while iterowa³ ka¿dy atak, a nie rundê walki
+
 public class Main {
 
 	public static void main(String[] args) {
 
-		Sword sword = new Sword("Zwyk³y miecz", 10, 5, 1.7);
-		Sword sword2 = new Sword("Lepszy miecz", 12, 6, 1.5);
+		// Scanner reader = new Scanner(System.in); // Reading from System.in
+		// System.out.println("Enter a number: ");
+		// int n = reader.nextInt(); // Scans the next token of the input as an
+		// int.
+		// System.out.println(n);
+
+		Sword sword = new Sword(4, "Miecz", 10, 5, 1.7);
+		Sword sword2 = new Sword(5, "Lepszy miecz", 12, 6, 1.5);
 
 		Warrior warrior = new Warrior(50, 5, "Andrzej", 1.7, sword);
 
@@ -139,11 +149,14 @@ public class Main {
 		// System.out.println(randomNum);
 		return randomNum;
 	}
-	//to siê robi za pomoc¹:  /**
+
+	// to siê robi za pomoc¹: /**
 	/**
 	 * metoda do obliczania obra¿eñ zadanych przez przeciwnika w danej rundzie
 	 * walki
+	 * 
 	 * @param orc
+	 *            obiekt Orka
 	 * @return
 	 * 
 	 */

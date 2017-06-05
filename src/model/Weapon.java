@@ -3,6 +3,19 @@ package model;
 public abstract class Weapon extends Item {
 
 	private int maxDamage;
+	private int minDamage;
+	private double speed;
+
+	public Weapon(int weight, String name, int maxDamage, int minDamage, double speed) {
+		super(weight, name);
+		this.maxDamage = maxDamage;
+		this.minDamage = minDamage;
+		this.speed = speed;
+	}
+
+	public Weapon() {
+		super();
+	}
 
 	public int getMaxDamage() {
 		return maxDamage;
@@ -12,8 +25,6 @@ public abstract class Weapon extends Item {
 		this.maxDamage = maxDamage;
 	}
 
-	private int minDamage;
-
 	public int getMinDamage() {
 		return minDamage;
 	}
@@ -21,8 +32,6 @@ public abstract class Weapon extends Item {
 	public void setMinDamage(int minDamage) {
 		this.minDamage = minDamage;
 	}
-
-	private double speed;
 
 	public double getSpeed() {
 		return speed;

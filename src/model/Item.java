@@ -5,6 +5,16 @@ public abstract class Item {
 	private int weight;
 	private String name;
 
+	public Item() {
+		super();
+	}
+
+	public Item(int weight, String name) {
+		super();
+		this.weight = weight;
+		this.name = name;
+	}
+
 	public int getWeight() {
 		return weight;
 	}
