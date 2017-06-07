@@ -10,6 +10,7 @@ import model.*; //<--- wiem, ¿e to s³abe rozwi¹zanie
 //TODO: zmieniæ metody na prywatne
 //TODO: przypisaæ do zminnej lokalnej w funkcjach, zmiast getów().
 //TODO: pomyœleæ, ¿eby while iterowa³ ka¿dy atak, a nie rundê walki
+//TESTTEST
 
 public class Main {
 
