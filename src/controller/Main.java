@@ -38,8 +38,8 @@ public class Main {
 		int roundIndex = 0;
 		double currentHeroSpeed = 0;
 		double currentEnemySpeed = 0;
-		int enemyHP = enemy.getHitPoints(); // <---- czy tak trzeba cachowaæ?
-		int heroHP = hero.getHitPoints(); // <---- czy tak trzeba cachowaæ?
+		int enemyHP = enemy.getHitPoints();
+		int heroHP = hero.getHitPoints();
 
 		while (heroHP > 0 && enemyHP > 0) {
 
@@ -151,7 +151,6 @@ public class Main {
 		return randomNum;
 	}
 
-	// to siê robi za pomoc¹: /**
 	/**
 	 * metoda do obliczania obra¿eñ zadanych przez przeciwnika w danej rundzie
 	 * walki
@@ -210,6 +209,10 @@ public class Main {
 	// metoda do wypisania podsumowania pora¿ki
 	public static void printLossSummary(String heroName, String enemyName, int enemyHP) {
 		System.out.println(heroName + " przegra³ starcie, " + enemyName + " pozosta³o " + enemyHP + " hp.");
+	}
+
+	public static void roundAttack() {
+
 	}
 
 }

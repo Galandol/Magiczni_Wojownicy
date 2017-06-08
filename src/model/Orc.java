@@ -1,6 +1,6 @@
 package model;
 
-public class Orc extends Monster {
+public class Orc extends Humanoid {
 	
 	private Weapon weapon;
 
