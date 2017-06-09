@@ -18,6 +18,11 @@ public abstract class Creature {
 		this.speed = speed;
 	}
 
+	@Override
+	public String toString() {
+		return "Nazwa: " + name + ", HP: " + hitPoints;
+	}
+
 	public int getHitPoints() {
 		return hitPoints;
 	}

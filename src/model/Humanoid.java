@@ -15,9 +15,14 @@ public abstract class Humanoid extends Creature {
 		this.armor = armor;
 
 	}
+
 	public Humanoid(int hitPoints, int strength, String name, double speed, Weapon weapon) {
 		super(hitPoints, strength, name, speed);
 		this.weapon = weapon;
+	}
+
+	public String toString(){
+		return super.toString()+ " Broñ: "+ weapon.getName();
 	}
 
 	public Weapon getWeapon() {

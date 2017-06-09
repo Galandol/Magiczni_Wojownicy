@@ -14,5 +14,7 @@ public abstract class Human extends Humanoid {
 	public Human(){
 		
 	}
+	
+	
 
 }
