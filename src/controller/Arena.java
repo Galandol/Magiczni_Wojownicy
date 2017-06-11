@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
-import model.*;
+import model.creatures.Humanoid;
 
 public class Arena {
 
@@ -33,12 +33,12 @@ public class Arena {
 			}
 			System.out.println("");
 			if (attackersCurrentSpeed >= attackedCurrentSpeed) {
-				roundResult result = attack(attacker, attacked, attackedHP, attackersCurrentSpeed);
+				RoundResult result = attack(attacker, attacked, attackedHP, attackersCurrentSpeed);
 				attackersCurrentSpeed = result.getAttackersCurrentSpeed();
 				attackedHP = result.getEnemyHP();
 				ifAttackerAttacked = true;
 			} else {
-				roundResult result = attack(attacked, attacker, attackerHP, attackedCurrentSpeed);
+				RoundResult result = attack(attacked, attacker, attackerHP, attackedCurrentSpeed);
 				attackedCurrentSpeed = result.getAttackersCurrentSpeed();
 				attackerHP = result.getEnemyHP();
 				ifAttackerAttacked = false;
@@ -54,7 +54,7 @@ public class Arena {
 		return didWon;
 	}
 
-	private roundResult attack(Humanoid attacker, Humanoid attacked, int attackedHP, double attackersCurrentSpeed) {
+	private RoundResult attack(Humanoid attacker, Humanoid attacked, int attackedHP, double attackersCurrentSpeed) {
 		// TODO: pomyœleæ nad systemem pancerzy i uników.
 
 		// w przysz³oœci dodaæ jeszcze parametr si³y.
@@ -66,7 +66,7 @@ public class Arena {
 
 		int HP = attackedHP; // trzeba bo inaczej rekurencja nie dzia³a
 								// poprawnie
-		roundResult result = new roundResult();
+		RoundResult result = new RoundResult();
 
 		System.out.println(attacker.getName() + " atakuje " + attacked.getName() + " - obra¿enia: " + damageDone);
 
@@ -93,7 +93,7 @@ public class Arena {
 		System.out.println("Witaj w grze Magiczni Wojownicy!");
 		CharacterPreparation start = new CharacterPreparation();
 
-		Human chosenHero = start.chooseHero();
+		Humanoid chosenHero = start.chooseHero();
 
 		boolean didWon = fight(chosenHero, start.chooseEnemy());
 

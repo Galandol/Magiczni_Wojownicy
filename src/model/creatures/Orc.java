@@ -1,4 +1,6 @@
-package model;
+package model.creatures;
+
+import model.items.Weapon;
 
 public class Orc extends Humanoid {
 

@@ -1,6 +1,6 @@
 package controller;
 
-public class roundResult {
+public class RoundResult {
 
 	private double attackersCurrentSpeed;
 	private int enemyHP;

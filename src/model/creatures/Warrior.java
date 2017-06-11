@@ -1,4 +1,7 @@
-package model;
+package model.creatures;
+
+import model.items.Armor;
+import model.items.Weapon;
 
 public class Warrior extends Human {
 
