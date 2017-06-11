@@ -6,4 +6,9 @@ public class Sword extends Weapon {
 		super(weight, name, maxDamage, minDamage, speed);
 	}
 
+	@Override
+	public String toString() {
+		return super.getName();
+	}
+
 }

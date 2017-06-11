@@ -20,7 +20,7 @@ public abstract class Creature {
 
 	@Override
 	public String toString() {
-		return "Nazwa: " + name + ", HP: " + hitPoints;
+		return "Nazwa: " + name + ", HP: " + hitPoints + ", Si³a: " + strength + ", Szybkoœæ: " + speed;
 	}
 
 	public int getHitPoints() {
