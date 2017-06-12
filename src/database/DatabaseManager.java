@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.items.Axe;
+import model.items.WeaponType;
 import model.items.Sword;
 import model.items.Weapon;
 
@@ -20,8 +22,8 @@ import model.creatures.Warrior;
 public class DatabaseManager {
 
 	private final String url = "jdbc:postgresql://localhost/magiczni_wojownicy";
-	private final String user = "Kris";
-	private final String password = "kris";
+	private final String user = "postgres";
+	private final String password = "user";
 
 	private static DatabaseManager instance;
 	private Connection connection;
@@ -64,21 +66,33 @@ public class DatabaseManager {
 
 		return count;
 	}
-
-	public List<Weapon> getItems() {
+	/**
+	 * bez parametrów zwraca listê wszystkich broni z bazy
+	 * @return
+	 */
+	public List<Weapon> getItems(){
 		List<Weapon> listOfWeapons = new ArrayList<Weapon>();
 		try {
+
 			Statement stmt = connection.createStatement();
 			String sql = "SELECT * FROM items";
 			ResultSet rs = stmt.executeQuery(sql);
 			// STEP 5: Extract data from result set
 
 			while (rs.next()) {
+				Weapon weapon = null;
 
-				Sword sword = new Sword(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
-						rs.getInt("mindamage"), rs.getDouble("speed"));
-				listOfWeapons.add(sword);
+				if (rs.getString("itype").equals(WeaponType.Sword.toString())) {
+					weapon = new Sword(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+
+				} else if (rs.getString("itype").equals(WeaponType.Axe.toString())) {
+					weapon = new Axe(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+				}
+				listOfWeapons.add(weapon);
 			}
+
 			rs.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -86,12 +100,51 @@ public class DatabaseManager {
 
 		return listOfWeapons;
 	}
+/**
+ * podaj jakiego typu broni chcesz listê
+ * @param weaponType
+ * @return
+ */
+	public List<Weapon> getItems(WeaponType weaponType) {
+		List<Weapon> listOfWeapons = new ArrayList<Weapon>();
+		try {
 
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM items WHERE itype = ?");
+			stmt.setString(1, weaponType.toString());
+			ResultSet rs = stmt.executeQuery();
+			// STEP 5: Extract data from result set
+
+			while (rs.next()) {
+				Weapon weapon = null;
+
+				if (weaponType == WeaponType.Sword) {
+					weapon = new Sword(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+
+				} else if (weaponType == WeaponType.Axe) {
+					weapon = new Axe(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+				}
+				listOfWeapons.add(weapon);
+			}
+
+			rs.close();
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+		return listOfWeapons;
+	}
+/**
+ * podaj jakiego typu osobników chcesz listê
+ * @param humanoidType
+ * @return
+ */
 	public List<Humanoid> getHumanoids(HumanoidType humanoidType) {
 		List<Humanoid> listOfHumanoids = new ArrayList<>();
 
 		try {
-			// Statement stmt = connection.createStatement();
+
 			PreparedStatement stmt = connection.prepareStatement("SELECT * from creatures WHERE ctype = ?");
 			stmt.setString(1, humanoidType.toString());
 			ResultSet rs = stmt.executeQuery();
@@ -105,7 +158,6 @@ public class DatabaseManager {
 				} else if (humanoidType == HumanoidType.Orc) {
 					humanoid = new Orc(rs.getInt("hitpoints"), rs.getInt("strength"), rs.getString("name"),
 							rs.getDouble("speed"), getWeapon(rs.getInt("weapon_id")));
-
 				}
 				listOfHumanoids.add(humanoid);
 			}
@@ -115,7 +167,11 @@ public class DatabaseManager {
 		}
 		return listOfHumanoids;
 	}
-
+/**
+ * metoda do przypisywania konkretnej postaci jej broni
+ * @param id
+ * @return
+ */
 	public Weapon getWeapon(int id) {
 
 		Weapon weapon = null;
@@ -124,8 +180,13 @@ public class DatabaseManager {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				weapon = new Sword(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
-						rs.getInt("mindamage"), rs.getDouble("speed"));
+				if (rs.getString("itype").equals("Sword")) {
+					weapon = new Sword(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+				} else if (rs.getString("itype").equals("Axe")) {
+					weapon = new Axe(rs.getInt("weight"), rs.getString("name"), rs.getInt("maxdamage"),
+							rs.getInt("mindamage"), rs.getDouble("speed"));
+				}
 			}
 			rs.close();
 		} catch (SQLException ex) {

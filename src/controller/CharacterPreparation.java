@@ -6,7 +6,7 @@ import java.util.Scanner;
 import model.creatures.HumanoidType;
 import model.creatures.Humanoid;
 import model.creatures.Warrior;
-
+import model.items.WeaponType;
 import model.items.Weapon;
 import database.DatabaseManager;
 
@@ -16,7 +16,9 @@ public class CharacterPreparation {
 
 	Scanner reader = new Scanner(System.in);
 
-	public List<Weapon> listOfSwords = db.getItems();
+	public List<Weapon> listOfAllWeapons = db.getItems();
+	public List<Weapon> listOfSwords = db.getItems(WeaponType.Sword);
+	public List<Weapon> listOfAxes = db.getItems(WeaponType.Axe);
 	public List<Humanoid> listofHeros = db.getHumanoids(HumanoidType.Human);
 	public List<Humanoid> listOfEnemies = db.getHumanoids(HumanoidType.Orc);
 
@@ -33,13 +35,13 @@ public class CharacterPreparation {
 		int speed = reader.nextInt();
 		System.out.println("Choose your character weapon ");
 		int weaponId = 1;
-		for (Weapon w : listOfSwords) {
+		for (Weapon w : listOfAllWeapons) {
 			System.out.println("[" + weaponId + "] " + w);
 			weaponId++;
 		}
 		weaponId = reader.nextInt();
 
-		Humanoid createdWarrior = new Warrior(hitPoints, strength, name, speed, listOfSwords.get(weaponId - 1));
+		Humanoid createdWarrior = new Warrior(hitPoints, strength, name, speed, listOfAllWeapons.get(weaponId - 1));
 
 		listofHeros.add(createdWarrior);
 
